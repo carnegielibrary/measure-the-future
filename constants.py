@@ -8,7 +8,7 @@ MTF_PATH = os.path.dirname(os.path.realpath(__file__)) + os.sep + "mtf_data"
 
 
 #set the names of mtf_visualize notebooks to use
-MTF_VISUALIZE_NAMES = ['mtf_visualize_8_time', 'mtf_visualize_5_heatmap', 'mtf_visualize_5_paths']
+MTF_VISUALIZE_NAMES = ['mtf_visualize_time', 'mtf_visualize_heatmap', 'mtf_visualize_paths']
 
 #set the names of the scout folders you want to visualize
 SCOUT_FOLDER_NAMES = ['DB1 - Entry', 'DB2 - Childrens']
