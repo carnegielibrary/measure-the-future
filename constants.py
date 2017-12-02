@@ -1,6 +1,10 @@
 from datetime import date
 import os
 
+#number of pixels on either side of MTF view frame where paths are not reliably detected
+#left, top, right, bottom
+MTF_DETECTION_PADDING = (30, 30, 30, 30)
+
 #Set the folder containing all the MtF data you want to visualize:
 #(It is assumed that all subfolders of this folder are data for one scout)
 #currently set to a subfolder of the folder this file is in called "mtf_data"
@@ -25,3 +29,4 @@ DATE_RANGE = (date(2017, 10, 25), date(2017, 11, 21))
 LOCALTZ = 'US/Eastern'
 
 MTF_JSON_ENCODING = 'ANSI'
+
