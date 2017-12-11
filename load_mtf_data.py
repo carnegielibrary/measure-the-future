@@ -72,21 +72,26 @@ def deduplicate(list_of_jsons):
     set_of_jsons = {json.dumps(d, sort_keys=True) for d in list_of_jsons}
     return [json.loads(t) for t in set_of_jsons]
  
-#-------------------
-#public
- 
 #returns tuple of (interactions, calibration image) 
-def from_set(scout_folder_path, set_subfolder_name):
+#entertimes returned in strings, not parsed into datetime objects
+def from_set_private(scout_folder_path, set_subfolder_name):
     path = scout_folder_path + os.sep + set_subfolder_name
     if os.path.isdir(path): return (interaction_data(path), calibration_image(path))
     else: return (None, None)
+ 
+#-------------------
+#public
+ 
+def from_set(scout_folder_path, set_subfolder_name):
+    (interactions, im) = from_set_private(scout_folder_path, set_subfolder_name)
+    return (parse_interaction_times(interactions), im)
  
 #returns tuple of (interactions, calibration image, set subfolder name)
 def from_most_recent_set(scout_folder_path):
     
     #iterate through subfolders, sorted by parsed date from most recent to oldest
     for set_subfolder_name in sorted(os.listdir(scout_folder_path), key=parsed_set_date, reverse=True):
-        (interactions, im) = from_set(scout_folder_path, set_subfolder_name)
+        (interactions, im) = from_set_private(scout_folder_path, set_subfolder_name)
         if interactions != None and im != None:
             return (interactions, im, set_subfolder_name)
     print("No usable set subfolders in " + scout_folder_path + "\n")
@@ -114,7 +119,7 @@ def combined_from_sets(scout_folder_path, set_subfolder_names):
     
     interactions_all = []
     for set_subfolder_name in set_subfolder_names:
-        (interactions, im) = from_set(scout_folder_path, set_subfolder_name)
+        (interactions, im) = from_set_private(scout_folder_path, set_subfolder_name)
         if interactions != None: interactions_all = interactions_all + interactions
         if im_overall == None: im_overall = im
         
@@ -145,7 +150,7 @@ def from_date_range(scout_folder_path, date_range, weekdays_to_include=range(7))
     for set_subfolder_name in sorted(os.listdir(scout_folder_path), key=parsed_set_date):
         if parsed_set_date(set_subfolder_name)
         
-        (interactions, im) = from_set(scout_folder_path, set_subfolder_name)
+        (interactions, im) = from_set_private(scout_folder_path, set_subfolder_name)
         if interactions != None and im != None:
             return (interactions, im, set_subfolder_name)
     print("No usable set subfolders in " + scout_folder_path + "\n")
