@@ -4,6 +4,15 @@ Measure the Future involves placement of fixed cameras, called scouts, that trac
 
 For more informaiton on Measure the Future, see http://measurethefuture.net/ and [Measure the Future's Github Account](https://github.com/MeasureTheFuture)
 
+#### Dependencies
+Jupyter Notebook - https://github.com/jupyter/notebook
+PIL - https://github.com/python-pillow/Pillow
+pytz - https://github.com/newvem/pytz
+nbformat - https://github.com/jupyter/nbformat
+nbparameterise - https://github.com/takluyver/nbparameterise
+numpy - https://github.com/numpy/numpy 
+Matplotlib - https://matplotlib.org/
+
 #### Format MtF data should be in before using this notebook
 Each scout should have a folder containing data recorded by that scout.  The name of the folder should be the name of that scout as you wish it to be displayed in the visualizations, for example "Main 1 - LobbyHall".
 
