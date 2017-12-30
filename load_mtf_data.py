@@ -27,7 +27,7 @@ def interaction_data(scout_subfolder_path):
     finally:
         return interactions
     
-def calibration_image(scout_subfolder_path:
+def calibration_image(scout_subfolder_path):
     im = None
     try:
         image_path = None
@@ -65,6 +65,7 @@ def parsed_interaction_time(interaction_time_string):
     
 def parse_interaction_times(interactions):
     #replace string in "EnteredAt" field with a parsed datetime object in the local timezone.
+    if interactions == None: return None
     for i in interactions: i['EnteredAt'] = parsed_interaction_time(i['EnteredAt'])
     return interactions
     
@@ -84,7 +85,9 @@ def from_set_private(scout_folder_path, set_subfolder_name):
  
 #-------------------
 #public
- 
+
+#returns tuple of (interactions, calibration image) 
+#enter times parsed into datetime objects 
 def from_set(scout_folder_path, set_subfolder_name):
     (interactions, im) = from_set_private(scout_folder_path, set_subfolder_name)
     return (parse_interaction_times(interactions), im)
