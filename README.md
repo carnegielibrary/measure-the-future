@@ -6,11 +6,17 @@ For more informaiton on Measure the Future, see http://measurethefuture.net/ and
 
 #### Dependencies
 Jupyter Notebook - https://github.com/jupyter/notebook
+
 PIL - https://github.com/python-pillow/Pillow
+
 pytz - https://github.com/newvem/pytz
+
 nbformat - https://github.com/jupyter/nbformat
+
 nbparameterise - https://github.com/takluyver/nbparameterise
+
 numpy - https://github.com/numpy/numpy 
+
 Matplotlib - https://matplotlib.org/
 
 #### Format MtF data should be in before using this notebook
@@ -41,12 +47,15 @@ This notebook runs a set of visualization notebooks on a set of scouts.  It shou
 
 Which notebooks to run, and which scouts to run them on, can be set in constants.py
 
+#### check_data.ipynb
+A short notebook to use to quickly tell you which data is missing in your set, and find the date ranges represented in each scout.
+
 #### Visualiztion Notebooks
 There should be a set of notebooks (stored in the same folder a main.ipynb), each of which does one particular visualization on one particular scout.  Their names sould be of the form:
 * MTF\_visualize\_\[name].ipynb
 
 #### constants.py
-Unless you're doing some serious tweaking of the visualizations, this should be the only file you need to touch.  Contains constants for where the MTF data is stored, which scouts and visulaization notebooks to run them on, the date range to visualize on, and miscellaneous parameters to individual visualizations.
+Miscellaneous constants used by multiple programs.
 
 #### load_mtf_data.py
 A python script used by all the visualization notebooks that takes care of importing MtF data into a nice format.
