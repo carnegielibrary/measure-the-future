@@ -6,7 +6,10 @@ from PIL import Image
 from datetime import date, datetime
 import pytz #time zone info
 
-from constants import LOCALTZ, MTF_JSON_ENCODING
+from constants import LOCALTZ, BG_IMG_GREYSCALE
+
+#encoding of json files gathered from MTF
+MTF_JSON_ENCODING = 'ANSI'
 
 #----------
 #private
@@ -24,7 +27,7 @@ def interaction_data(scout_subfolder_path):
     finally:
         return interactions
     
-def calibration_image(scout_subfolder_path, grayscale=True):
+def calibration_image(scout_subfolder_path:
     im = None
     try:
         image_path = None
@@ -32,7 +35,7 @@ def calibration_image(scout_subfolder_path, grayscale=True):
             if filename.endswith("jpg") and filename.startswith("scout"):
                 image_path = scout_subfolder_path + os.sep + filename
         im = Image.open(image_path)
-        if grayscale: im = im.convert('L')
+        if BG_IMG_GREYSCALE: im = im.convert('L')
     except Exception as e:
         print("Problem loading calibration image in " + scout_subfolder_path + "\n" + str(e))
     finally:
@@ -91,7 +94,7 @@ def from_most_recent_set(scout_folder_path):
     
     #iterate through subfolders, sorted by parsed date from most recent to oldest
     for set_subfolder_name in sorted(os.listdir(scout_folder_path), key=parsed_set_date, reverse=True):
-        (interactions, im) = from_set_private(scout_folder_path, set_subfolder_name)
+        (interactions, im) = from_set(scout_folder_path, set_subfolder_name)
         if interactions != None and im != None:
             return (interactions, im, set_subfolder_name)
     print("No usable set subfolders in " + scout_folder_path + "\n")
