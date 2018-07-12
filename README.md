@@ -4,6 +4,8 @@ Measure the Future involves placement of fixed cameras, called scouts, that trac
 
 For more informaiton on Measure the Future, see http://measurethefuture.net/ and [Measure the Future's Github Account](https://github.com/MeasureTheFuture)
 
+This repo is intended as a tool to visualize raw data from Measure The Future scouts.
+
 #### Dependencies
 Jupyter Notebook - https://github.com/merrittkowaleski/notebook
 
@@ -19,7 +21,7 @@ numpy - https://github.com/merrittkowaleski/numpy
 
 Matplotlib - https://github.com/merrittkowaleski/matplotlib
 
-#### Format MtF data should be in before using this notebook
+#### Format MtF data should be in before using these notebooks
 Each scout should have a folder containing data recorded by that scout.  The name of the folder should be the name of that scout as you wish it to be displayed in the visualizations, for example "Main 1 - LobbyHall".
 
 A scout's folder should have several subfolders containing data from different ranges of dates.  The names of these folders should be of the form:
@@ -27,13 +29,15 @@ A scout's folder should have several subfolders containing data from different r
 
 Each of these subfolders should contain a jpeg calibration image, and four json files: scout_interactions, scout_summaries, scouts, and scout_healths.  For these visualizations, only scout_interactions and the calibration image are used.
 
+Theoretically, the data will naturally be in this form when extracted from the scouts.
+
 #### Calibration image
 Filename should be of the form:
 * scout-\[anything can go here].jpg
 
 This shows the view the scout sees during the date range of the subfolder it's in.  The reason there is a separete calibration image for each subfolder is that getting the data out of the scout and deleting it in preparation from more data collection involves touching the scout.  Doing so may move the scout slightly, so it must be recalibrated.  Thus, the calibration images will not always be identical for different date ranges.
 
-These visualizations can be used to combine data from multiple date range subfolders of one scout.  If you do this, it is best to manually check the calibration images to make sure they are similar enough as to be negligible for the purpose of visualization.  If not, you will need to manually transform the image and the interaction data for non-conforming subfolders.
+These visualizations can be used to combine data from multiple date range subfolders of one scout.  If you do this, it is best to manually check the calibration images to make sure the differences are small enough as to be negligible for the purpose of visualization.  If not, you will need to manually transform the image and the interaction data for non-conforming subfolders.
 
 Additionally, you may select the "best" calibration image (the sharpest and most free of people and temoprary objects) and put a copy of it in the scout's folder (the main folder, not a date range subfolder).  If an image exists there, it will be chosen as the image to display on multi-date range visualizations. if not, an arbitrary one will be selected.
 
@@ -53,6 +57,7 @@ A short notebook to use to quickly tell you which data is missing in your set, a
 #### Visualiztion Notebooks
 There should be a set of notebooks (stored in the same folder a main.ipynb), each of which does one particular visualization on one particular scout.  Their names sould be of the form:
 * MTF\_visualize\_\[name].ipynb
+If you create your own, add them to MTF_VISUALIZE_NAMES in main.ipynb.
 
 #### constants.py
 Miscellaneous constants used by multiple programs.
