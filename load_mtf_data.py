@@ -48,7 +48,7 @@ def parsed_set_date(set_subfolder_name):
     #set_subfolder_name should be of the form "[scoutname]_[MMDDYYYY]"
     try:
         datestr = folder_name.split("_")[1]
-        date = datetime.strptime(datestr, "%m%d%Y").date()
+        date = datetime.strptime(datestr, "%Y%m%d").date()
     except:
         print("problem parsing date string in " + folder_name)
         date = date(10, 1, 1)

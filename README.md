@@ -25,7 +25,7 @@ Matplotlib - https://github.com/merrittkowaleski/matplotlib
 Each scout should have a folder containing data recorded by that scout.  The name of the folder should be the name of that scout as you wish it to be displayed in the visualizations, for example "Main 1 - LobbyHall".
 
 A scout's folder should have several subfolders containing data from different ranges of dates.  The names of these folders should be of the form:
-* \[shortened scout name]\_\[end date of range in the form MMDDYYYY]
+* \[shortened scout name]\_\[end date of range in the form YYYYMMDD]
 
 Each of these subfolders should contain a jpeg calibration image, and four json files: scout_interactions, scout_summaries, scouts, and scout_healths.  For these visualizations, only scout_interactions and the calibration image are used.
 
