@@ -9,12 +9,14 @@ import pytz #time zone info
 from constants import LOCALTZ, BG_IMG_GREYSCALE
 
 #encoding of json files gathered from MTF
-MTF_JSON_ENCODING = 'ANSI'
+#None chooses system-dependent, default encoding
+#"ANSI" worked on the previous system used.
+MTF_JSON_ENCODING = None
 
 #----------
 #private
 
-def interaction_data(scout_subfolder_path):    
+def interaction_data(scout_subfolder_path):      
     interactions = None
     try:
         interactions_path = scout_subfolder_path + os.sep + "scout_interactions.json"
@@ -22,9 +24,10 @@ def interaction_data(scout_subfolder_path):
         with open(interactions_path, 'r', encoding=MTF_JSON_ENCODING) as interactions_file:
             interactions = json.load(interactions_file)
     except Exception as e:
-        print("Problem loading interaction data in " + scout_subfolder_path + "\n" + str(e))
+        print("Problem loading interaction data in " + scout_subfolder_path + ": " + str(e))
         interactions = None
     finally:
+        #gets called no matter what
         return interactions
     
 def calibration_image(scout_subfolder_path):
@@ -37,7 +40,7 @@ def calibration_image(scout_subfolder_path):
         im = Image.open(image_path)
         if BG_IMG_GREYSCALE: im = im.convert('L')
     except Exception as e:
-        print("Problem loading calibration image in " + scout_subfolder_path + "\n" + str(e))
+        print("Problem loading calibration image in " + scout_subfolder_path + ": " + str(e))
     finally:
         return im
  
@@ -138,7 +141,7 @@ def combined_from_all_sets(scout_folder_path):
     
 #returns tuple of (interactions, calibration image)    
 #min_date and max_date should be datetime objects
-#weeksdays to include should be a list of numbers between 1 and 7 
+#weekdays to include should be a list of numbers between 1 and 7 
 def from_date_range(scout_folder_path, date_range, weekdays_to_include=range(7)):
     (interactions, im) = combined_from_all_sets(scout_folder_path)
     
